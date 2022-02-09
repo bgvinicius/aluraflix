@@ -19,6 +19,7 @@ public class Video {
     @NotBlank
     private String description;
 
+    @NotBlank
     @URL
     private String url;
 
