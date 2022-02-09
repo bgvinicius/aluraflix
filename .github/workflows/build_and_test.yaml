@@ -13,3 +13,7 @@ jobs:
           cache: 'maven'
       - name: Build and Run Tests
         run: mvn package
+      - name: Publish coverage reports
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_SECRET }}
