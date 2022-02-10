@@ -15,7 +15,7 @@ public class Category {
     @NotBlank
     private String title;
 
-    @Pattern(regexp = "[0123456789ABCDEF]{6}")
+    @Pattern(regexp = "[0123456789ABCDEFabcdef]{6}")
     private String color;
 
     public Category() {
