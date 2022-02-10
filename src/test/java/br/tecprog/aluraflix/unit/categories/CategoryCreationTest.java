@@ -70,7 +70,7 @@ public class CategoryCreationTest {
 
     @Test
     public void categoryNullColor() {
-        verifyInvalidCategoryCreation(new Category(null, "a valid title", ""));
+        verifyInvalidCategoryCreation(new Category(null, "a valid title", null));
     }
 
     @Test
