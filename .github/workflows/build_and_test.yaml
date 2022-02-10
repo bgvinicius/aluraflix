@@ -28,3 +28,4 @@ jobs:
         with:
           reporter: 'github-pr-review'
           tool_name: 'reviewdog'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
