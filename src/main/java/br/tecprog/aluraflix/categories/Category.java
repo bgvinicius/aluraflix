@@ -2,6 +2,7 @@ package br.tecprog.aluraflix.categories;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -15,6 +16,7 @@ public class Category {
     @NotBlank
     private String title;
 
+    @NotNull
     @Pattern(regexp = "[0123456789ABCDEFabcdef]{6}")
     private String color;
 
