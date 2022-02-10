@@ -17,3 +17,15 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_SECRET }}
+  checkstyle_job:
+    runs-on: ubuntu-latest
+    name: Checkstyle job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run check style
+        uses: nikitasavinov/checkstyle-action@master
+        with:
+          reporter: 'github-pr-check'
+          tool_name: 'reviewdog'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
