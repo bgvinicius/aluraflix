@@ -1,5 +1,8 @@
-package br.tecprog.aluraflix.videos;
+package br.tecprog.aluraflix.unit.videos;
 
+import br.tecprog.aluraflix.videos.Video;
+import br.tecprog.aluraflix.videos.VideoRepository;
+import br.tecprog.aluraflix.videos.VideosController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

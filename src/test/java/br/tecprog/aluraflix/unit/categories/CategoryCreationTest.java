@@ -1,5 +1,8 @@
-package br.tecprog.aluraflix.categories;
+package br.tecprog.aluraflix.unit.categories;
 
+import br.tecprog.aluraflix.categories.CategoriesController;
+import br.tecprog.aluraflix.categories.CategoriesRepository;
+import br.tecprog.aluraflix.categories.Category;
 import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
