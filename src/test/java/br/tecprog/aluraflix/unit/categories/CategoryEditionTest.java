@@ -5,6 +5,9 @@ import br.tecprog.aluraflix.categories.CategoriesRepository;
 import br.tecprog.aluraflix.categories.Category;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @SpringBootTest
 public class CategoryEditionTest {
@@ -22,7 +26,7 @@ public class CategoryEditionTest {
     @Autowired
     CategoriesController categoriesController;
 
-    final long categoryId = 1L;
+    final static long categoryId = 1L;
     final Category existingCategory = new Category(categoryId, "a valid title", "aBcD18");
     final Category updatedCategory = new Category(categoryId, "a new title", "D18aBc");
 
@@ -58,5 +62,27 @@ public class CategoryEditionTest {
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
         Mockito.verify(categoriesRepository, Mockito.times(1)).findById(categoryId);
         Mockito.verify(categoriesRepository, Mockito.never()).save(Mockito.any());
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidCategoriesProvider")
+    public void invalidCategoryEditionTest(final Category invalidCategory) {
+        Assertions.assertThrows(RuntimeException.class, () -> categoriesController.update(categoryId, invalidCategory));
+        Mockito.verify(categoriesRepository, Mockito.never()).findById(categoryId);
+        Mockito.verify(categoriesRepository, Mockito.never()).save(Mockito.any());
+    }
+
+    private static Stream<Arguments> invalidCategoriesProvider() {
+        return Stream.of(
+                Arguments.of(new Category(categoryId, "", "abcDEF")),
+                Arguments.of(new Category(categoryId, null, "abcDEF")),
+                Arguments.of(new Category(categoryId, "       ", "abcDEF")),
+                Arguments.of(new Category(categoryId, "a valid one", "")),
+                Arguments.of(new Category(categoryId, "a valid one", null)),
+                Arguments.of(new Category(categoryId, "a valid one", "     ")),
+                Arguments.of(new Category(categoryId, "a valid one", "aZZzXK")),
+                Arguments.of(new Category(categoryId, "a valid one", "aBcd123")),
+                Arguments.of(new Category(categoryId, "a valid one", "Abc12"))
+        );
     }
 }
