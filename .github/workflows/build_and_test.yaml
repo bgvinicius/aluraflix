@@ -26,6 +26,6 @@ jobs:
       - name: Run check style
         uses: nikitasavinov/checkstyle-action@master
         with:
-          reporter: 'github-pr-review'
+          reporter: 'github-pr-check'
           tool_name: 'reviewdog'
           github_token: ${{ secrets.GITHUB_TOKEN }}
