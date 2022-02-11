@@ -75,7 +75,9 @@ public class CategoriesController {
   public ResponseEntity<Iterable<Video>> getVideosByCategory(@PathVariable final Long id) {
     var maybeCategory = categoriesRepository.findById(id);
 
-    if (maybeCategory.isEmpty()) return ResponseEntity.notFound().build();
+    if (maybeCategory.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
 
     var category = maybeCategory.get();
 
