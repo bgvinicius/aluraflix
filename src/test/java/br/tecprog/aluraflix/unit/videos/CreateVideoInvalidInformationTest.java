@@ -1,11 +1,13 @@
 package br.tecprog.aluraflix.unit.videos;
 
 import br.tecprog.aluraflix.videos.Video;
+import br.tecprog.aluraflix.videos.VideoDTO;
 import br.tecprog.aluraflix.videos.VideoRepository;
 import br.tecprog.aluraflix.videos.VideosController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,8 +24,9 @@ public class CreateVideoInvalidInformationTest {
     final Video expectedVideo = new Video(1L, "Title", "description", "http://test.com");
 
     void makeAssertions(final Video video) {
-        Assertions.assertThrows(RuntimeException.class, () -> videosController.create(video));
-        Mockito.verify(videoRepository, Mockito.never()).save(video);
+        var videoDto = new VideoDTO(video.getId(), video.getTitle(), video.getDescription(), video.getUrl());
+        Assertions.assertThrows(RuntimeException.class, () -> videosController.create(videoDto));
+        Mockito.verify(videoRepository, Mockito.never()).save(Mockito.any());
     }
 
     @Test
