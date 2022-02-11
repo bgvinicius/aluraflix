@@ -1,5 +1,6 @@
 package br.tecprog.aluraflix.videos;
 
+import br.tecprog.aluraflix.categories.Category;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
@@ -23,6 +24,10 @@ public class Video {
     @URL
     private String url;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
     public Video() {
     }
 
@@ -33,6 +38,10 @@ public class Video {
         this.url = url;
     }
 
+    public Video(Long id, String title, String description, String url, Category category) {
+        this(id, title, description, url);
+        this.category = category;
+    }
 
     public String getTitle() {
         return title;
@@ -48,5 +57,9 @@ public class Video {
 
     public Long getId() {
         return id;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 }
