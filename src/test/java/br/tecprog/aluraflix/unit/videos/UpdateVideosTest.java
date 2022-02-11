@@ -38,7 +38,7 @@ public class UpdateVideosTest {
         Mockito.verify(videoRepository, Mockito.times(1)).save(Mockito.any());
         Mockito.verify(videoRepository, Mockito.times(1)).findById(videoId);
         Assertions.assertEquals(HttpStatus.OK, updateResponse.getStatusCode());
-        Assertions.assertEquals(video, updateResponse.getBody());
+        Assertions.assertEquals(video.getTitle(), updateResponse.getBody().getTitle());
     }
 
     @Test
