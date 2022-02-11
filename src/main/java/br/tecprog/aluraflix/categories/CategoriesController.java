@@ -1,5 +1,7 @@
 package br.tecprog.aluraflix.categories;
 
+import br.tecprog.aluraflix.videos.Video;
+import br.tecprog.aluraflix.videos.VideoRepository;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -19,9 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoriesController {
 
   final CategoriesRepository categoriesRepository;
+  final VideoRepository videoRepository;
 
-  public CategoriesController(CategoriesRepository categoriesRepository) {
+  public CategoriesController(CategoriesRepository categoriesRepository,
+                              VideoRepository videoRepository) {
     this.categoriesRepository = categoriesRepository;
+    this.videoRepository = videoRepository;
   }
 
   @GetMapping("categories")
@@ -64,5 +69,18 @@ public class CategoriesController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable final Long id) {
     categoriesRepository.findById(id).ifPresent(category -> categoriesRepository.deleteById(id));
+  }
+
+  @GetMapping("categories/{id}/videos")
+  public ResponseEntity<Iterable<Video>> getVideosByCategory(@PathVariable final Long id) {
+    var maybeCategory = categoriesRepository.findById(id);
+
+    if (maybeCategory.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
+
+    var category = maybeCategory.get();
+
+    return ResponseEntity.ok(videoRepository.findVideosByCategory(category));
   }
 }
