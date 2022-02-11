@@ -1,6 +1,7 @@
 package br.tecprog.aluraflix.unit.videos;
 
 import br.tecprog.aluraflix.videos.Video;
+import br.tecprog.aluraflix.videos.VideoDTO;
 import br.tecprog.aluraflix.videos.VideoRepository;
 import br.tecprog.aluraflix.videos.VideosController;
 import org.junit.jupiter.api.Assertions;
@@ -13,25 +14,25 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest
 public class CreateVideosTests {
-    @MockBean
-    VideoRepository videoRepository;
+  @MockBean
+  VideoRepository videoRepository;
 
-    @Autowired
-    VideosController videosController;
+  @Autowired
+  VideosController videosController;
 
-    final Video expectedVideo = new Video(1L, "Title", "description", "http://test.com");
+  final Video expectedVideo = new Video(1L, "Title", "description", "http://test.com");
 
-    @Test
-    @DisplayName("creating new video with correct information")
-    public void createWithCorrectInformationTest() {
+  @Test
+  @DisplayName("creating new video with correct information")
+  public void createWithCorrectInformationTest() {
 
-        Mockito.when(videoRepository.save(Mockito.any())).thenReturn(expectedVideo);
+    Mockito.when(videoRepository.save(Mockito.any())).thenReturn(expectedVideo);
 
-        final Video video = new Video(null, "Title", "description", "http://test.com");
-        final Video createdVideo = videosController.create(video);
+    final VideoDTO video = new VideoDTO(null, "Title", "description", "http://test.com");
+    final Video createdVideo = videosController.create(video).getBody();
 
-        Mockito.verify(videoRepository).save(video);
-        Assertions.assertEquals(expectedVideo, createdVideo);
-    }
+    Mockito.verify(videoRepository, Mockito.times(1)).save(Mockito.any());
+    Assertions.assertEquals(expectedVideo, createdVideo);
+  }
 
 }

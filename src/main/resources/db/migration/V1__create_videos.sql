@@ -1,6 +1,7 @@
-CREATE TABLE videos(
-    id SERIAL,
-    title varchar,
+CREATE TABLE videos
+(
+    id          SERIAL PRIMARY KEY,
+    title       varchar,
     description varchar,
-    url varchar
+    url         varchar
 );
