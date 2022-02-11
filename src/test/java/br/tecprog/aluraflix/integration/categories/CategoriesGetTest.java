@@ -19,18 +19,19 @@ public class CategoriesGetTest {
     @Autowired
     CategoriesController categoriesController;
 
-    final List<Category> rawCategories = List.of(
+    final List<Category> rawCategories = new ArrayList<>(List.of(
             new Category(null, "Category 1", "abcDEF"),
             new Category(null, "Category 2", "1bcDEF"),
             new Category(null, "Category 2", "2bcDEF"),
             new Category(null, "Category 3", "3bcDEF"),
             new Category(null, "Category 4", "4bcDEF")
-    );
+    ));
 
     final List<Category> createdCategories = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
+        rawCategories.add(new Category(1L, "LIVRE", "00FF00"));
         for (Category rawCategory : rawCategories) {
             createdCategories.add(categoriesController.create(rawCategory));
         }
