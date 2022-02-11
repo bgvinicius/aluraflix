@@ -5,7 +5,9 @@ Projeto desenvolvido para disciplina de Técnicas de Programação 2 da Universi
 
 O projeto consiste em uma API desenvolvida em spring boot a partir do backlog presente [aqui](https://www.alura.com.br/challenges/back-end/semana-01-api-rest).
 
-O projeto possui fluxo de integração contínua configurado, para tal, utiliza o [codecov.io](https://www.codecov.io/) para armazenamento de coverage dos testes.
+O projeto possui fluxo de integração contínua configurado, com execução de testes, coverage e análise estática de código com o [CheckStyle](https://checkstyle.sourceforge.io/) e [reviewdog](https://github.com/reviewdog/reviewdog). Para armazenamento de coverage dos testes, foi utilizado o [codecov.io](https://www.codecov.io/).
+
+Além disso, o projeto possui deploy automatizado no Heroku a partir de commits na branch `main`.
 
 Os testes são implementados usando JUnit 5 e Mockito para realizar mocks das dependências. A injeção de dependências é facilitada pelo próprio spring.
 
