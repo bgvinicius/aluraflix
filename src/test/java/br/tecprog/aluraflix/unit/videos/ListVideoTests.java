@@ -3,6 +3,7 @@ package br.tecprog.aluraflix.unit.videos;
 import br.tecprog.aluraflix.videos.Video;
 import br.tecprog.aluraflix.videos.VideoRepository;
 import br.tecprog.aluraflix.videos.VideosController;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import org.junit.jupiter.api.Assertions;
@@ -38,7 +39,7 @@ public class ListVideoTests {
 
     Mockito.when(videoRepository.findAll()).thenReturn(generatedVideos);
 
-    final Iterable<Video> result = videosController.getAll();
+    final Iterable<Video> result = videosController.getAll(Optional.empty());
 
     Mockito.verify(videoRepository, Mockito.times(1)).findAll();
     Assertions.assertEquals(generatedVideos, result);

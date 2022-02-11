@@ -1,6 +1,7 @@
 package br.tecprog.aluraflix.videos;
 
 import br.tecprog.aluraflix.categories.CategoriesRepository;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,8 +31,12 @@ public class VideosController {
   }
 
   @GetMapping("videos")
-  public Iterable<Video> getAll() {
-    return videoRepository.findAll();
+  public Iterable<Video> getAll(@RequestParam Optional<String> search) {
+    if (search.isEmpty()) {
+      return videoRepository.findAll();
+    }
+
+    return videoRepository.findByTitleIgnoreCaseContaining(search.get().toLowerCase());
   }
 
   @GetMapping("videos/{id}")
