@@ -1,5 +1,5 @@
 CREATE TABLE categories(
-    id serial,
+    id serial PRIMARY KEY,
     title varchar,
     color varchar(6)
 )
