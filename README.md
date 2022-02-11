@@ -23,7 +23,7 @@ Uma vez que o java estiver instalado, você na raiz do projeto você pode execut
 
 --- 
 
-# Executando API
+# Executando a API
 
 Para executar a aplicação, você precisa ter o postgres em sua máquina. É possível usar o docker para executá-lo em sua máquina, para isso, você pode [instalar o docker por aqui](https://docs.docker.com/engine/install/ubuntu/).
 
@@ -37,8 +37,14 @@ Por fim, execute a aplicação com o comando:
 
 Isso iniciará a API localmente na porta 8080.
 
-Você pode ver a documentação da API [nesse link](https://www.postman.com/acessocidadaoce/workspace/aluraflix/collection/17513664-c0b5a8bd-c77a-4bff-89ba-ef47517dc2cb?ctx=documentation).
+Você pode ver a documentação da API [nesse link](https://www.postman.com/aerospace-geoscientist-56099919/workspace/aluraflix/overview).
 
-Caso deseje executar algum endpoint, lembre-se de colocar o environment para dev.
+Clique aqui [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/19549763-461452f4-ae7a-42da-bc9f-ea5ed38754f3?action=collection%2Ffork&collection-url=entityId%3D19549763-461452f4-ae7a-42da-bc9f-ea5ed38754f3%26entityType%3Dcollection%26workspaceId%3D2a5a8837-be26-4ae7-af2a-1f05ed235836) para executar requisições na API disponibilizada no Heroku.
 
 ---
+
+# Deploy
+
+A aplicação possui deploy automatizado no heroku sempre que surgir algum commit novo na branch main, é possível acessar a API através do seguinte link:
+
+`https://aluraflix-tecnicasprog2.herokuapp.com/`
